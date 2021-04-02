@@ -1,0 +1,26 @@
+<?php
+
+namespace App;
+
+use Illuminate\Support\Facades\Http;
+
+class LastFMAPIHelper {
+
+    private static $ACCESS_TOKEN = "a62ac89f85a8c8d78a6e7fe4849aa66c";
+    private static $SECRET = "4dccf1d5a95ea8d5a986a9ba0a3b5f69";
+    private static $API_URL = "http://ws.audioscrobbler.com/2.0/";
+
+    /**
+     * @param limit : Nombre de données max
+     * @param name : Nom de l'album
+     * Fonction: getAlbumsFromNames
+     * Description: Retourne la liste des albums correspondant au nom passé en paramètre
+     */
+    public static function getAlbumsFromNames($name,$limit = 10) {
+        $url = self::$API_URL . "?method=album.search&api_key=". self::$ACCESS_TOKEN ."&album=". $name ."&limit=" . $limit . "&format=json";
+        $response = Http::get($url);
+        return $response->json()["results"]['albummatches'];
+    }
+}
+
+?>

@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::get('/','HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/** LAST FM API */
+Route::get("/lastfmapi/getAlbumByName/{name}",'LastFMApiController@searchAlbums');

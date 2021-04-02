@@ -7,10 +7,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Top Albums</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,13 +20,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    𝙏𝙊𝙋 𝘼𝙇𝘽𝙐𝙈𝙎
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -41,14 +47,18 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">Se connecter</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">Inscription</a>
                                 </li>
                             @endif
                         @else
+                            <div class="searchbar mg-r-20" style="display:flex;align-items:center;">
+                                <input id="searchAlbums" class="form-control form-control-sm" type="text" name="" placeholder="Search...">
+                                <a href="#" class="search_icon mg-l-5"><i class="fas fa-search"></i></a>
+                            </div>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -58,7 +68,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Déconnexion
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -66,15 +76,53 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
                     </ul>
+                    @endguest
                 </div>
             </div>
         </nav>
 
         <main class="py-4">
+            <input type="hidden" value="{{ url('/') }}" id="baseUrl">
             @yield('content')
         </main>
     </div>
 </body>
+<script>
+    var baseUrl = $("#baseUrl").val()
+
+    $("#searchAlbums").autocomplete({
+        source: function(request,response) {
+            appendTo:this,
+            $.getJSON(baseUrl + "/lastfmapi/getAlbumByName/" + request.term, function(data) {
+                response($.map(data,function(value,key) {
+                    console.log(data)
+                    return {
+                        label: value.name + " -  " + value.artist,
+                        value: value.name,
+                        image: value.image[0]["#text"]
+                    }
+                }))
+            });
+        }
+    });
+
+    $("#searchAlbums").data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+    console.log(item)
+    var $li = $('<li>'),
+        $img = $('<img>');
+
+
+    $img.attr({
+      src: item.image,
+      alt: item.label,
+      style: 'margin-right:5px;background-color:transparent;border:none;'
+    });
+
+    $li.attr('data-value', item.label);
+    $li.append($img).append(item.label);    
+
+    return $li.appendTo(ul);
+  };
+</script>
 </html>

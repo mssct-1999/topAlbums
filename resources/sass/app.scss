@@ -6,3 +6,45 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+/** default layout css **/
+
+.btn.btn-primary {
+    background-color:$default-blue;
+}
+
+.bolder-text {
+    font-weight:bolder;
+}
+
+.main-title {
+    font-size:20px;
+    font-weight:bolder;
+}
+
+$spaceamounts: (5,10,15,20,25,30,35,40,45,50,75,100);
+$sides: (top,bottom,left,right);
+
+@each $space in $spaceamounts {
+    @each $side in $sides {
+        .mg-#{str-slice($side,0,1)}-#{$space} {
+            margin-#{$side}: #{$space}px !important;
+        }
+
+        .pd-#{str-slice($side, 0, 1)}-#{$space} {
+            padding-#{$side}: #{$space}px !important;
+        }
+    }
+}
+
+/** jquery ui override **/
+
+.ui-menu-item {
+    padding:5px !important;
+    font-size:12px;
+}
+
+.ui-menu-item:hover {
+    background-color: $default-rose;
+    font-weight: bolder;
+}

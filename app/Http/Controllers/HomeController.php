@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\LastFMAPIHelper;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $albums = LastFMAPIHelper::getAlbumsFromNames('My Beautiful Dark Twisted Fantasy');
         return view('home');
     }
 }
