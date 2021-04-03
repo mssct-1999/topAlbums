@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8"> 
-            <div style="display:flex;align-items:center;"> 
+            <div class="mg-t-10" style="display:flex;align-items:center;"> 
                 <img src="{{ asset('img/animated-logo.gif') }}" alt="Logo" style="width:100px;">
                 <h3 class="bolder-text">Veuillez vous authentifier pour continuer</h3>
             </div>

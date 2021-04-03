@@ -10944,6 +10944,14 @@ a.text-dark:focus {
 
 /** default layout css **/
 
+body {
+  background-color: white !important;
+}
+
+li {
+  list-style-type: none;
+}
+
 .btn.btn-primary {
   background-color: #1647FB;
 }
@@ -11359,5 +11367,32 @@ a.text-dark:focus {
 
 .py-4 {
   padding-top: 0px !important;
+}
+
+/** ALBUMS PART CSS **/
+
+#tracklist-album {
+  width: 30%;
+  padding: 15px;
+  position: relative;
+  bottom: 50px;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.track-album {
+  border-bottom: 0.5px solid lightgrey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+}
+
+.disk-image {
+  -webkit-mask-image: radial-gradient(circle farthest-side at center, transparent 20%, white 10%);
+  width: 30px;
+  border-radius: 20px;
 }
 

@@ -10,16 +10,19 @@
                     <span class="barlow-font" style="color:white;">Sortie le {{ $album['wiki']['published'] }}</span>
                 @endif
             </div>
-            <div style="display:flex; justify-content:flex-end;">
+            <div id="container-cover" style="display:flex; justify-content:flex-end;">
                 <img id="cover" crossorigin="anonymous" src="{{ $album['image'][3]['#text'] }}" alt="Pochette d'album" style="position:relative;top:50px;left:150px;border:1px solid white;"/>
             </div>
         </div>
         <div id="content">
-            @if(isset($album['tracks']['track']))
-                <div>
-                    <span class="bolder-text">Tracklist</span>
+            @if(count($album['tracks']['track']))
+                <div id="tracklist-album" class="mg-l-20">
+                    <span class="bolder-text main-title">Tracklist</span>
                     @foreach($album['tracks']['track'] as $track)
-                        <li>{{ $track['name'] }}</li>
+                        <div class="track-album">
+                            <a href="{{ $album['url'] }}" target="_blank" data-toggle="tooltip" data-placement="left" title="Écouter sur LastFM"><img class="disk-image" src="{{ $album['image'][1]['#text'] }}" alt="Pochette album petite"></a>
+                            <li class="mg-l-10"><span class="bolder-text">#{{ $track['@attr']['rank'] }}</span> - {{ $track['name'] }}</li>
+                        </div>
                     @endforeach
                 </div>
             @endif
@@ -27,11 +30,15 @@
     </div>
     <script>
         $().ready(function() {
-            const colorThief = new ColorThief()
-            const img = $("#cover")[0]
-            var rgbColors = colorThief.getColor(img)
-            $("#header-container").css("background-color","rgb(" + rgbColors[0] +"," + rgbColors[1] + "," + rgbColors[2])
+            $(window).on('load',function() {
+                const colorThief = new ColorThief()
+                const img = $("#cover")
+                var rgbColors = colorThief.getColor(img[0])
+                $("#header-container").css("background-color","rgb(" + rgbColors[0] +"," + rgbColors[1] + "," + rgbColors[2])
+            })
+
+            $('a[data-toggle="tooltip"]').tooltip();
+
         })
     </script>
-
 @endsection
