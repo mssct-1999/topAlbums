@@ -10,10 +10,11 @@
     <title>Top Albums</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -55,9 +56,13 @@
                                 </li>
                             @endif
                         @else
-                            <div class="searchbar mg-r-20" style="display:flex;align-items:center;">
-                                <input id="searchAlbums" class="form-control form-control-sm" type="text" name="" placeholder="Search...">
-                                <a href="#" class="search_icon mg-l-5"><i class="fas fa-search"></i></a>
+                            <div class="searchbar mg-r-20">
+                                <form action="" style="display:flex;align-items:center;">
+                                    <input id="searchAlbums" class="form-control form-control-sm" type="text" name="" placeholder="Search..." style="width:300px;">
+                                    <input id="artist" type="hidden"> 
+                                    <input id="album" type="hidden"> 
+                                    <a href="#" class="search_icon mg-l-5"><i class="fas fa-search"></i></a>
+                                </form>
                             </div>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -96,28 +101,31 @@
             appendTo:this,
             $.getJSON(baseUrl + "/lastfmapi/getAlbumByName/" + request.term, function(data) {
                 response($.map(data,function(value,key) {
-                    console.log(data)
                     return {
                         label: value.name + " -  " + value.artist,
                         value: value.name,
+                        album: value.name,
+                        artist: value.artist,
                         image: value.image[0]["#text"]
                     }
                 }))
             });
+        },
+        select: function(event,ui) {
+            
         }
     });
 
     $("#searchAlbums").data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-    console.log(item)
     var $li = $('<li>'),
         $img = $('<img>');
 
+        $img.attr({
+            src: item.image,
+            alt: item.label,
+            style: 'margin-right:5px;background-color:transparent;border:none;'
+        });
 
-    $img.attr({
-      src: item.image,
-      alt: item.label,
-      style: 'margin-right:5px;background-color:transparent;border:none;'
-    });
 
     $li.attr('data-value', item.label);
     $li.append($img).append(item.label);    

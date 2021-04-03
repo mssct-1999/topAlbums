@@ -21,6 +21,18 @@ class LastFMAPIHelper {
         $response = Http::get($url);
         return $response->json()["results"]['albummatches'];
     }
+
+    /**
+     * @param artist : Nom de l'artiste
+     * @param album : Nom de l'album
+     * Fonction: getAlbumInfo
+     * Description: Retourne les informations d'un album
+     */
+    public static function getAlbumInfo($artist,$album) {
+        $url = self::$API_URL . "?method=album.getinfo&api_key=" . self::$ACCESS_TOKEN . "&artist=" . $artist . "&album=" . $album . "&format=json";
+        $response = Http::get($url);
+        return $response->json();
+    }
 }
 
 ?>

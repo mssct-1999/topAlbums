@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $albums = LastFMAPIHelper::getAlbumsFromNames('My Beautiful Dark Twisted Fantasy');
         return view('home');
     }
 }

@@ -1,5 +1,6 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@200&display=swap');
 
 // Variables
 @import 'variables';
@@ -20,6 +21,10 @@
 .main-title {
     font-size:20px;
     font-weight:bolder;
+}
+
+.barlow-font {
+    font-family: 'Barlow', sans-serif !important;
 }
 
 $spaceamounts: (5,10,15,20,25,30,35,40,45,50,75,100);
@@ -47,4 +52,8 @@ $sides: (top,bottom,left,right);
 .ui-menu-item:hover {
     background-color: $default-rose;
     font-weight: bolder;
+}
+
+.py-4 {
+    padding-top:0px !important;
 }
