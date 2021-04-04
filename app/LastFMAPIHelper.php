@@ -17,7 +17,7 @@ class LastFMAPIHelper {
      * Description: Retourne la liste des albums correspondant au nom passé en paramètre
      */
     public static function getAlbumsFromNames($name,$limit = 10) {
-        $url = self::$API_URL . "?method=album.search&api_key=". self::$ACCESS_TOKEN ."&album=". $name ."&limit=" . $limit . "&format=json";
+        $url = self::$API_URL . "?method=album.search&api_key=". self::$ACCESS_TOKEN ."&album=". urlencode($name) ."&limit=" . $limit . "&format=json";
         $response = Http::get($url);
         return $response->json()["results"]['albummatches'];
     }
@@ -29,9 +29,13 @@ class LastFMAPIHelper {
      * Description: Retourne les informations d'un album
      */
     public static function getAlbumInfo($artist,$album) {
-        $url = self::$API_URL . "?method=album.getinfo&api_key=" . self::$ACCESS_TOKEN . "&artist=" . $artist . "&album=" . $album . "&format=json";
+        $url = self::$API_URL . "?method=album.getinfo&api_key=" . self::$ACCESS_TOKEN . "&artist=" . urlencode($artist) . "&album=" . urlencode($album) . "&format=json";
         $response = Http::get($url);
-        return $response->json();
+        $datas = $response->json();
+        if (!isset($datas['album'])) {
+            return null;
+        }
+        return $response->json()['album'];
     }
 }
 

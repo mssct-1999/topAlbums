@@ -50,6 +50,16 @@ $sides: (top,bottom,left,right);
     }
 }
 
+.d-justify-center {
+    display:flex;
+    justify-content: center;
+}
+
+.d-align-center {
+    display:flex;
+    align-items: center;
+}
+
 /** jquery ui override **/
 
 .ui-menu-item {
@@ -73,8 +83,19 @@ $sides: (top,bottom,left,right);
     padding:15px;
     position: relative;
     bottom: 50px;
-    border-radius: 5px;
+}
+
+#notation-album {
+    width: 40%;
+    padding:15px;
+    position:relative;
+    bottom:50px;
+    height:150px;
+}
+
+.shadow {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 5px;
 }
 
 .track-album {
@@ -91,4 +112,19 @@ $sides: (top,bottom,left,right);
     -webkit-mask-image: radial-gradient(circle farthest-side at center, transparent 20%, white 10%);
     width:30px;
     border-radius:20px;
+    border: 0.5px solid grey;
+}
+
+.disk-image:hover {
+    border-color: #D2565D;
+    animation-name: spin;
+    animation-duration: 1000ms;
+}
+
+@keyframes spin { 
+    from { 
+        transform: rotate(0deg); 
+    } to { 
+        transform: rotate(360deg); 
+    }
 }

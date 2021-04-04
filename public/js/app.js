@@ -37336,6 +37336,23 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/albums.js":
+/*!********************************!*\
+  !*** ./resources/js/albums.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(window).on('load', function () {
+  var colorThief = new ColorThief();
+  var img = $("#cover");
+  var rgbColors = colorThief.getColor(img[0]);
+  $("#header-container").css("background-color", "rgb(" + rgbColors[0] + "," + rgbColors[1] + "," + rgbColors[2]);
+});
+$('a[data-toggle="tooltip"]').tooltip();
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -37409,13 +37426,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!**************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/js/albums.js ./resources/sass/app.scss ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\laragon\www\topAlbums\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\topAlbums\resources\js\albums.js */"./resources/js/albums.js");
 module.exports = __webpack_require__(/*! C:\laragon\www\topAlbums\resources\sass\app.scss */"./resources/sass/app.scss");
 
 

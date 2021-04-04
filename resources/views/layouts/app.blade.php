@@ -57,12 +57,9 @@
                                 </li>
                             @endif
                         @else
-                            <div class="searchbar mg-r-20">
-                                <form action="" style="display:flex;align-items:center;">
+                            <div class="searchbar mg-r-20 mg-t-5">
+                                <form id="searchbarForm" style="display:flex;align-items:center;">
                                     <input id="searchAlbums" class="form-control form-control-sm" type="text" name="" placeholder="Search..." style="width:300px;">
-                                    <input id="artist" type="hidden"> 
-                                    <input id="album" type="hidden"> 
-                                    <a href="#" class="search_icon mg-l-5"><i class="fas fa-search"></i></a>
                                 </form>
                             </div>
                             <li class="nav-item dropdown">
@@ -113,7 +110,8 @@
             });
         },
         select: function(event,ui) {
-            
+            $("#searchbarForm").attr('action',baseUrl + "/albums/show/" + ui.item.artist + "/" + ui.item.album)
+            $("#searchbarForm").submit()
         }
     });
 

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class AlbumController extends Controller
 {
+
+    /**
+     * Create a new controller instance
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     /**
      * @param artist : Nom de l'artiste
@@ -14,7 +24,7 @@ class AlbumController extends Controller
      * Affichage d'un album
      */
     public function show($artist,$album) {
-        $album = LastFMAPIHelper::getAlbumInfo($artist,$album)['album'];
+        $album = LastFMAPIHelper::getAlbumInfo($artist,$album);
         return view('Album.show',compact('album'));
     }
 }
