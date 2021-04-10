@@ -31,6 +31,7 @@ class AlbumController extends Controller
         $artisteDb = Artiste::whereRaw("UPPER(nom) = ?", [strtoupper($artist)])->first();
         $votes = null;
         $userVote = null;
+        $lastVotes = null;
         // si il y a eu des votes pour cet album
         if (isset($artisteDb)) {
             $albumDb = Album::whereRaw("UPPER(nom) = ?", [strtoupper($album['name'])])->where("artiste_id","=",$artisteDb->id)->first();
