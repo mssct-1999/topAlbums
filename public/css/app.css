@@ -10973,6 +10973,14 @@ li {
   font-family: "Barlow", sans-serif !important;
 }
 
+a {
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .mg-t-5 {
   margin-top: 5px !important;
 }
