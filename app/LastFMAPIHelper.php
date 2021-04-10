@@ -37,6 +37,22 @@ class LastFMAPIHelper {
         }
         return $response->json()['album'];
     }
+
+    /**
+     * @param artist: Nom de l'artiste
+     * @param album: Nom de l'album
+     * Fonction: getCoverAlbum
+     * Description: Retourne la cover d'un album de l'artiste passé en paramètre
+     */
+    public static function getCoverAlbum($artist,$album) {
+        $url = self::$API_URL . "?method=album.getinfo&api_key=" . self::$ACCESS_TOKEN . "&artist=" . urlencode($artist) . "&album=" . urlencode($album) . "&format=json";
+        $response = Http::get($url);
+        $datas = $response->json();
+        if (!isset($datas['album'])) {
+            return null;
+        }
+        return $response->json()['album']['image'];
+    }
 }
 
 ?>

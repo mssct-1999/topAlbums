@@ -17,7 +17,12 @@ Auth::routes();
 Route::get('/','HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
+/** ALBUMS */
 Route::get('/albums/show/{artist}/{album}','AlbumController@show')->name('album.show');
+
+/** VOTES */
+Route::post('/votes/store','VoteController@store')->name('votes.store');
+Route::post('/votes/update/{vote}','VoteController@update')->name('votes.update');
 
 /** LAST FM API */
 Route::get("/lastfmapi/getAlbumByName/{name}",'LastFMApiController@searchAlbums');

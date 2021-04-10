@@ -27,17 +27,66 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div id="notation-album" class="mg-l-10 shadow">
-                            <span class="bolder-text main-title">Notation</span>
-
+                @endif
+                <div class="mg-l-20" style="width:40%;">   
+                    <div id="notation-album" class="mg-l-10 shadow">
+                        <span class="bolder-text main-title">Notation</span>
+                        <div class="d-align-center d-space-between box">
+                            @if(isset($votes))
+                                <div>
+                                    <svg class="radial-progress" data-percentage="{{ $votes->avg('note') }}" viewBox="0 0 100 100">
+                                        <circle class="incomplete" cx="40" cy="40" r="35"></circle>
+                                        <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58406743523136;"></circle>
+                                        <text class="percentage bolder-text" x="50%" y="50%" transform="matrix(0, 1, -1, 0, 85, -10)">{{ round($votes->avg('note'),2) }} /10</text>
+                                    </svg>
+                                </div>
+                            @else
+                                <div>
+                                    <span class="italic-text">Cet album n'a pas encore été noté pour l'instant</span>
+                                </div>
+                            @endif
+                            @if(!isset($userVote))
+                                <form action="{{ route('votes.store') }}" method="POST">
+                            @else 
+                                <form action="{{ route('votes.update',['vote' => $userVote->id]) }}" method="POST">
+                            @endif
+                                @csrf
+                                <div class="d-align-center mg-t-10">
+                                    <input value="{{ isset($userVote) ? $userVote->note : null }}" type="text" name="note" class="form-control form-control-sm" style="width:50px;">
+                                    <input type="hidden" name="artist" value="{{ $album['artist']  }}">
+                                    <input type="hidden" name="album" value="{{ $album['name'] }}">
+                                    <span class="mg-l-10 bolder-text">/ 10</span>
+                                    @if(!isset($userVote))
+                                        <button id="voteButton" class="btn mg-l-10" style="color:white;font-size:11px;padding:5px;">Voter</button>
+                                    @else
+                                        <button id="voteButton" class="btn mg-l-10" style="color:white;font-size:11px;padding:5px;">Modifier</button>
+                                    @endif
+                                </div>
+                            </form>
                         </div>
                     </div>
-                @endif
+                    @if(isset($lastVotes))
+                        <div class="mg-l-10 shadow">
+                            <span class="bolder-text main-title">Derniers votes</span>
+                            @foreach($lastVotes as $vote)
+                                <li class="mg-t-10">{{ $vote->updated_at->format('d/m/Y')}} - {{ $vote->user->name  }} - 
+                                    @if ($vote->note >= 7)
+                                        <span style="color:#4DC274;" class="italic-text bolder-text">{{ $vote->note }}</span>
+                                    @elseif($vote->note < 7 && $vote->note >= 5)
+                                        <span style="color:#F56702;" class="italic-text bolder-text">{{ $vote->note }}</span>
+                                    @else
+                                        <span style="color:#E62737;" class="italic-text bolder-text">{{ $vote->note }}</span>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    <!-- TODO posts/commentaires -->
+                </div>
             </div>
         </div>
-        <script>
-
-        </script>
     @else
         <div style="height:50vh;" class="container d-justify-center d-align-center">
             <div>

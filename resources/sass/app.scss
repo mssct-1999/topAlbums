@@ -26,6 +26,10 @@ li {
     font-weight:bolder;
 }
 
+.italic-text {
+    font-style:italic;
+}
+
 .main-title {
     font-size:20px;
     font-weight:bolder;
@@ -53,6 +57,11 @@ $sides: (top,bottom,left,right);
 .d-justify-center {
     display:flex;
     justify-content: center;
+}
+
+.d-space-between {
+    display:flex;
+    justify-content: space-between;
 }
 
 .d-align-center {
@@ -86,15 +95,15 @@ $sides: (top,bottom,left,right);
 }
 
 #notation-album {
-    width: 40%;
-    padding:15px;
+    width: 100%;
     position:relative;
     bottom:50px;
-    height:150px;
+    height:210px;
 }
 
 .shadow {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding:15px;
     border-radius: 5px;
 }
 
@@ -115,11 +124,48 @@ $sides: (top,bottom,left,right);
     border: 0.5px solid grey;
 }
 
+.disk-image-50 {
+    -webkit-mask-image: radial-gradient(circle farthest-side at center, transparent 20%, white 10%);
+    width:50px;
+    border-radius:50px;
+    border: 0.5px solid grey;
+}
+
 .disk-image:hover {
     border-color: #D2565D;
     animation-name: spin;
     animation-duration: 1000ms;
 }
+
+
+svg.radial-progress {
+    height: auto;
+    max-width: 200px;
+    padding: 1em;
+    transform: rotate(-90deg);
+    width: 100%;
+  }
+  
+  svg.radial-progress circle {
+    fill: rgba(0,0,0,0);
+    stroke: #fff;
+    stroke-dashoffset: 219.91148575129; 
+    stroke-width: 10;
+  }
+  
+  svg.radial-progress circle.incomplete { opacity: 0.25; }
+  
+  svg.radial-progress circle.complete { stroke-dasharray: 219.91148575129; }
+  
+  svg.radial-progress text {
+    fill: black;
+    text-anchor: middle;
+  }
+
+  .box {
+    height: 130px;
+  }
+
 
 @keyframes spin { 
     from { 
