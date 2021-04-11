@@ -12,7 +12,7 @@
                     @endif
                 </div>
                 <div id="container-cover" style="display:flex; justify-content:flex-end;">
-                    <img id="cover" crossorigin="anonymous" src="{{ $album['image'][3]['#text'] }}" alt="Pochette d'album" style="position:relative;top:50px;left:150px;border:1px solid lightgrey;"/>
+                    <img id="cover" crossorigin="anonymous" src="{{ $album['image'][3]['#text'] }}" alt="Pochette d'album" style="position:relative;top:20%;left:50%;border:1px solid lightgrey;"/>
                 </div>
             </div>
             <div id="content">
@@ -28,7 +28,7 @@
                             @endforeach
                         </div>
                 @endif
-                <div class="mg-l-20" style="width:40%;">   
+                <div id="container-right" class="mg-l-20" style="width:40%;">   
                     <div id="notation-album" class="mg-l-10 shadow">
                         <span class="bolder-text main-title">Notation</span>
                         <div class="d-align-center d-space-between box">
@@ -51,8 +51,8 @@
                                 <form action="{{ route('votes.update',['vote' => $userVote->id]) }}" method="POST">
                             @endif
                                 @csrf
-                                <div class="d-align-center mg-t-10">
-                                    <input value="{{ isset($userVote) ? $userVote->note : null }}" type="text" name="note" class="form-control form-control-sm" style="width:50px;">
+                                <div class="d-align-center mg-t-10 mg-b-10">
+                                    <input value="{{ isset($userVote) ? $userVote->note : null }}" type="text" name="note" class="form-control form-control-sm" style="width:50px;" required>
                                     <input type="hidden" name="artist" value="{{ $album['artist']  }}">
                                     <input type="hidden" name="album" value="{{ $album['name'] }}">
                                     <span class="mg-l-10 bolder-text">/ 10</span>
@@ -62,6 +62,7 @@
                                         <button id="voteButton" class="btn mg-l-10" style="color:white;font-size:11px;padding:5px;">Modifier</button>
                                     @endif
                                 </div>
+                                <span class="italic-text" style="color:grey;font-size:10px;">Un vote seulement / Nombre à virgule autorisé. (Remplacer la virgule par un point)</span>
                             </form>
                         </div>
                     </div>

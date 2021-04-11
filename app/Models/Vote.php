@@ -29,7 +29,6 @@ class Vote extends Model
 	protected $table = 'votes';
 
 	protected $casts = [
-		'note' => 'int',
 		'user_id' => 'int',
 		'album_id' => 'int'
 	];

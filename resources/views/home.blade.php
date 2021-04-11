@@ -11,7 +11,7 @@
                     <span class="bolder-text mg-r-10">#{{ $index+1 }}</span>
                     <div class="mg-b-10 d-align-center shadow" style="padding:10px;border-radius:50px;width:100%;justify-content:space-between">
                         <a href="{{ route('album.show',['artist' => $album->artiste->nom, 'album' => $album->nom]) }}">   
-                            <li> 
+                            <li class="album-name"> 
                                 <img class="disk-image-50" src="{{ $album->cover[1]['#text'] }}" alt="Cover de l'album {{ $album->nom }} de {{ $album->artiste->nom }}"/> {{ $album->nom }} / {{ $album->artiste->nom }}
                             </li>
                         </a>

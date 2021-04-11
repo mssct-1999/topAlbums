@@ -6,6 +6,7 @@ use App\Models\Vote;
 use App\Models\Album;
 use App\Models\Artiste;
 use Illuminate\Http\Request;
+use App\Http\Requests\VoteRequest;
 
 class VoteController extends Controller
 {
@@ -22,7 +23,7 @@ class VoteController extends Controller
     /**
      * Enregistrement d'un nouveau vote
      */
-    public function store(Request $request) {
+    public function store(VoteRequest $request) {
         $datas = $request->all();
         // recherche ou création de l'artiste
         $artist = Artiste::createIfNotExist($datas);
@@ -45,7 +46,7 @@ class VoteController extends Controller
     /**
      * Modification d'un vote
      */
-    public function update(Request $request, Vote $vote) {
+    public function update(VoteRequest $request, Vote $vote) {
         $vote->update(['note' => $request->note]);
         return redirect()->back();
     }

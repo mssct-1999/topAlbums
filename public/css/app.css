@@ -11502,3 +11502,55 @@ svg.radial-progress text {
   }
 }
 
+/** responsive design **/
+
+@media (max-width: 780px) {
+  #cover {
+    display: none;
+  }
+
+  #content {
+    margin-top: 110px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #cover {
+    display: none;
+  }
+
+  #content {
+    margin-top: 110px;
+  }
+}
+
+@media (max-width: 380px) {
+  #tracklist-album {
+    display: none;
+  }
+
+  #container-right {
+    width: 80% !important;
+  }
+}
+
+@media (max-width: 415px) {
+  .disk-image-50 {
+    width: 30px !important;
+  }
+
+  .album-name {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 280px) {
+  .disk-image-50 {
+    width: 25px !important;
+  }
+
+  .album-name {
+    font-size: 8px;
+  }
+}
+
