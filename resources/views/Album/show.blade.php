@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div id="content">
-                @if(count($album['tracks']['track']))
-                    <div style="display:flex;justify-content:flex-start;"> 
+                @if(isset($album['tracks']['track']) && count($album['tracks']['track']))
+                    <div style="display:flex;"> 
                         <div id="tracklist-album" class="mg-l-20 shadow">
                             <span class="bolder-text main-title">Tracklist</span>
                             @foreach($album['tracks']['track'] as $track)
@@ -27,6 +27,7 @@
                                 </div>
                             @endforeach
                         </div>
+                        
                 @endif
                 <div id="container-right" class="mg-l-20" style="width:40%;">   
                     <div id="notation-album" class="mg-l-10 shadow">
@@ -83,10 +84,36 @@
                         </div>
                     @endif
                 </div>
-                <div>
-                    <!-- TODO posts/commentaires -->
-                </div>
             </div>
+            <!-- Espace commentaire -->
+            @isset($albumDb)
+                <div style="padding:15px;">
+                    <h1 style="font-size:20px;font-weight:bolder;">Espace commentaires</h1>
+                    <hr>
+                    @foreach($comments as $comment)
+                        <div class="shadow mg-t-10">
+                            <div>
+                                <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
+                                <p>{{ $comment->comments }}</p>
+                                @if(Auth::user()->id == $comment->user->id)
+                                    <a href="{{ route('comments.destroy',$comment->id) }}" class="btn btn-danger">Supprimer</a>
+                                @endif
+                                <span class="italic-text">Par {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</span>
+                            </div>
+                        </div>
+                    @endforeach
+                    <form class="mg-t-50" method="POST" action="{{ route('comments.store') }}">
+                        @csrf
+                        <input type="hidden" name="id_album" value="{{ $albumDb->id }}">
+                        <div class="form-group"> 
+                            <label for="sendCommentaireTextarea">Votre commentaire : </label>
+                            <input style="width:300px;" class="form-control mg-b-10" name="title" type="text" placeholder="Titre" required/>
+                            <textarea name="comments" class="form-control" id="sendCommentaireTextarea" rows="3"></textarea>
+                            <button class="btn btn-primary mg-t-10">Envoyer mon commentaire</button>
+                        </div>
+                    </form>
+                </div>
+            @endisset
         </div>
     @else
         <div style="height:50vh;" class="container d-justify-center d-align-center">
