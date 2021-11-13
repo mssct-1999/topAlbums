@@ -95,23 +95,27 @@
                             <div>
                                 <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
                                 <p>{{ $comment->comments }}</p>
-                                @if(Auth::user()->id == $comment->user->id)
-                                    <a href="{{ route('comments.destroy',$comment->id) }}" class="btn btn-danger">Supprimer</a>
-                                @endif
-                                <span class="italic-text">Par {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</span>
+                                <div style="display:flex;justify-content:space-between;">
+                                    <span class="italic-text">Par {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</span>
+                                    @if(Auth::user()->id == $comment->user->id)
+                                        <a href="{{ route('comments.destroy',$comment->id) }}" class="btn btn-danger mg-l-10"><i class="fas fa-trash"></i></a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     @endforeach
-                    <form class="mg-t-50" method="POST" action="{{ route('comments.store') }}">
-                        @csrf
-                        <input type="hidden" name="id_album" value="{{ $albumDb->id }}">
-                        <div class="form-group"> 
-                            <label for="sendCommentaireTextarea">Votre commentaire : </label>
-                            <input style="width:300px;" class="form-control mg-b-10" name="title" type="text" placeholder="Titre" required/>
-                            <textarea name="comments" class="form-control" id="sendCommentaireTextarea" rows="3"></textarea>
-                            <button class="btn btn-primary mg-t-10">Envoyer mon commentaire</button>
-                        </div>
-                    </form>
+                    <div class="container-fluid">
+                        <form class="mg-t-50" method="POST" action="{{ route('comments.store') }}">
+                            @csrf
+                            <input type="hidden" name="id_album" value="{{ $albumDb->id }}">
+                            <div class="form-group"> 
+                                <label for="sendCommentaireTextarea">Votre commentaire : </label>
+                                <input style="width:300px;" class="form-control mg-b-10" name="title" type="text" placeholder="Titre" required/>
+                                <textarea name="comments" class="form-control" id="sendCommentaireTextarea" rows="3"></textarea>
+                                <button class="btn btn-primary mg-t-10">Envoyer mon commentaire</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             @endisset
         </div>

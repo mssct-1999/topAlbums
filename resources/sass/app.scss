@@ -77,6 +77,11 @@ $sides: (top,bottom,left,right);
     align-items: center;
 }
 
+.flex-column {
+    display:flex;
+    flex-direction: column;
+}
+
 /** jquery ui override **/
 
 .ui-menu-item {

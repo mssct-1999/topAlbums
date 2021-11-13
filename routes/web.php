@@ -30,3 +30,9 @@ Route::get('/comments/delete/{comments}','CommentaireController@destroy')->name(
 
 /** LAST FM API */
 Route::get("/lastfmapi/getAlbumByName/{name}",'LastFMApiController@searchAlbums');
+
+/** USER */
+Route::prefix('/users')->group(function() {
+    Route::get('/','UserController@index')->name('users.index');
+    Route::post('/update/{user}','UserController@update')->name('users.update');
+});
