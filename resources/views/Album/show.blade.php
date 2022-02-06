@@ -58,9 +58,9 @@
                                     <input type="hidden" name="album" value="{{ $album['name'] }}">
                                     <span class="mg-l-10 bolder-text">/ 10</span>
                                     @if(!isset($userVote))
-                                        <button id="voteButton" class="btn mg-l-10" style="color:white;font-size:11px;padding:5px;">Voter</button>
+                                        <button class="btn mg-l-10 colorThiefButton" style="color:white;font-size:11px;padding:5px;">Voter</button>
                                     @else
-                                        <button id="voteButton" class="btn mg-l-10" style="color:white;font-size:11px;padding:5px;">Modifier</button>
+                                        <button class="btn mg-l-10 colorThiefButton" style="color:white;font-size:11px;padding:5px;">Modifier</button>
                                     @endif
                                 </div>
                                 <span class="italic-text" style="color:grey;font-size:10px;">Un vote seulement / Nombre à virgule autorisé. (Remplacer la virgule par un point)</span>
@@ -87,7 +87,7 @@
             </div>
             <!-- Espace commentaire -->
             @isset($albumDb)
-                <div style="padding:15px;">
+                <div style="padding:15px;" class="mg-t-25 shadow">
                     <h1 style="font-size:20px;font-weight:bolder;">Espace commentaires</h1>
                     <hr>
                     @foreach($comments as $comment)
@@ -104,15 +104,15 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="container-fluid">
+                    <div class="container">
                         <form class="mg-t-50" method="POST" action="{{ route('comments.store') }}">
                             @csrf
                             <input type="hidden" name="id_album" value="{{ $albumDb->id }}">
                             <div class="form-group"> 
-                                <label for="sendCommentaireTextarea">Votre commentaire : </label>
+                                <label for="sendCommentaireTextarea" class="bolder-text">Votre commentaire : </label>
                                 <input style="width:300px;" class="form-control mg-b-10" name="title" type="text" placeholder="Titre" required/>
                                 <textarea name="comments" class="form-control" id="sendCommentaireTextarea" rows="3"></textarea>
-                                <button class="btn btn-primary mg-t-10">Envoyer mon commentaire</button>
+                                <button class="btn colorThiefButton mg-t-10" style="color:white;">Envoyer mon commentaire</button>
                             </div>
                         </form>
                     </div>

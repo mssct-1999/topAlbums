@@ -35,4 +35,5 @@ Route::get("/lastfmapi/getAlbumByName/{name}",'LastFMApiController@searchAlbums'
 Route::prefix('/users')->group(function() {
     Route::get('/','UserController@index')->name('users.index');
     Route::post('/update/{user}','UserController@update')->name('users.update');
+    Route::get('/destroy/{user}','UserController@destroy')->name('users.destroy');
 });

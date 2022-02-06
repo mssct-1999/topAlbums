@@ -81,9 +81,8 @@ class UserController extends Controller
             $img = Image::make($_FILES['profil_picture']['tmp_name']);
             // si changement d'image 
             if (isset($user->profil_image)) {
-                dd(public_path() . '' . $user->profil_picture);
                 // suppression de l'ancienne image
-                File::delete(public_path() . '' . $user->profil_picture);
+                File::delete($user->profil_image);
             }
             $filePath = 'img/' . $request->name . '_' . $dataImage;
             $img->save($filePath);
@@ -101,6 +100,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $hasVotes = $user->votes()->get();
+        if ($hasVotes->count() > 0) {
+            $_GET['confirmDelete'] = true;
+            return back();
+        }
+        // todo redirection vers login.php -> page d'accueil car plus de compte
+        return back()->with('success',"L'utilisateur a correctement été supprimé.");
     }
 }

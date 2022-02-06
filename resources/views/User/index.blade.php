@@ -13,41 +13,56 @@
         </div>
     @endisset
     <hr>
-    <div class="container-fluid mg-t-40">
+    <div class="container-fluid mg-t-40 d-space-between">
         <!-- début formulaire modification info utilisateur -->
-        <h4 class="bolder-text">Modifier les informations de mon profil</h4>
-        <div class="container-fluid">
-            <form action="{{ route('users.update',$user->id) }}" enctype="multipart/form-data" method="post">
-                @csrf
-                <div class="form-group">
-                    <label for="pseudoUpdateUser">Pseudonyme :</label>
-                    <input id="pseudoUpdateUser" type="text" value="{{ $user->name }}" class="form-control form-control-sm" name="name">
-                </div>
-                <div class="form-group">
-                    <label for="emailUpdateUser">Email :</label>
-                    <input id="emailUpdateUser" name="email" type="text" value="{{ $user->email }}" class="form-control form-control-sm" name="name">
-                </div>
-                <div class="form-group">
-                    <span class="mg-r-10">Photo de profil :</span><input name="profil_picture" type="file" id="customFile">
-                </div>
-                <button class="btn btn-success" style="font-size:10px;">Modifier mes informations</button>
-            </form>
+        <div class="col-md-6 shadow"> 
+            <h4 class="bolder-text">Modifier les informations de mon profil</h4>
+            <hr>
+            <div class="container-fluid">
+                <form action="{{ route('users.update',$user->id) }}" enctype="multipart/form-data" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="pseudoUpdateUser">Pseudonyme :</label>
+                        <input id="pseudoUpdateUser" type="text" value="{{ $user->name }}" class="form-control form-control-sm" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailUpdateUser">Email :</label>
+                        <input id="emailUpdateUser" name="email" type="text" value="{{ $user->email }}" class="form-control form-control-sm" name="name">
+                    </div>
+                    <div class="form-group">
+                        <span class="mg-r-10">Photo de profil :</span><input name="profil_picture" type="file" id="customFile">
+                    </div>
+                    <button class="btn btn-success mg-b-30" style="font-size:10px;">Modifier mes informations</button>
+                </form>
+            </div>
         </div>
-        <hr>
 
         <!-- début derniers vote de l'utilisateur -->
-        <h4 class="bolder-text">Derniers votes de l'utilisateur</h4>
-        <hr>
-        <div>
-            @foreach($lastVotes as $vote) 
-                <div class="mg-t-20 d-align-center">
-                    <img class="mg-r-5" src="{{ App\LastFMAPIHelper::getCoverAlbum($vote->album->artiste->nom,$vote->album->nom)[1]['#text'] }}" rel="Cover de l'album {{ $vote->album->nom }} de {{ $vote->album->artiste->nom }}" style="border-radius:10px;">
-                    <div class="flex-column mg-l-10">
-                        <span style="font-size:20px;" class="bolder-text">{{ $vote->note }}</span>
-                        <span class="italic-text" style="font-size:9px;color:grey;">{{ $vote->updated_at->format('d/m/Y') }}</span>
-                    </div>
+        <div class="col-md-6 shadow mg-l-5">
+            <h4 class="bolder-text">Derniers votes de l'utilisateur</h4>
+            <hr>
+            @if($lastVotes->count() > 0)
+                <div class="d-align-center">
+                    @foreach($lastVotes as $vote) 
+                        <div class="mg-t-20 mg-l-15 d-align-center">
+                            <img class="mg-r-5" src="{{ App\LastFMAPIHelper::getCoverAlbum($vote->album->artiste->nom,$vote->album->nom)[1]['#text'] }}" rel="Cover de l'album {{ $vote->album->nom }} de {{ $vote->album->artiste->nom }}" style="border-radius:10px;">
+                            <a href="{{ route('album.show',['artist' => $vote->album->artiste->nom, 'album' => $vote->album->nom]) }}" class="flex-column mg-l-10">
+                                <span style="font-size:20px;" class="bolder-text">{{ $vote->note }}</span>
+                                <span class="italic-text" style="font-size:9px;color:grey;">{{ $vote->updated_at->format('d/m/Y') }}</span>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>  
+            @else 
+                <div class="container-fluid d-justify-center">
+                    <span class="italic-text">Aucune activité récente.</span>
                 </div>
-            @endforeach
+            @endif
         </div>
+    </div>
+    <div class="container-fluid mg-t-10">
+        <div>
+            <a href="{{ route('users.destroy',$user->id) }}" class="badge badge-danger text-12"><i class="fas fa-user-slash mg-r-5"></i>Supprimer le profil</a>
+        </div> 
     </div>
 @endsection 

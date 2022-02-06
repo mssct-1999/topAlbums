@@ -36,7 +36,8 @@ class VoteController extends Controller
         if (isset($album) && isset($artist)) {
             // 1 vote par utilisateur par album
             $votesExist = Vote::where("user_id","=",$datas['user_id'])->where("album_id","=",$datas['album_id'])->get();
-            if ($votesExist->count() == 0) {
+            $checkDatas = $request->validate('create');
+            if ($votesExist->count() == 0 && $checkDatas['success']) {
                 Vote::create($datas);
             }
         }

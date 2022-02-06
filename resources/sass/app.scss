@@ -62,6 +62,14 @@ $sides: (top,bottom,left,right);
     }
 }
 
+$i: 1;
+@for $i from 1 to 100 {
+    .text-#{$i} {
+        font-size:#{$i}px;
+    }
+}
+
+
 .d-justify-center {
     display:flex;
     justify-content: center;
@@ -75,6 +83,11 @@ $sides: (top,bottom,left,right);
 .d-align-center {
     display:flex;
     align-items: center;
+}
+
+.d-space-around {
+    display:flex;
+    justify-content:space-around;
 }
 
 .flex-column {

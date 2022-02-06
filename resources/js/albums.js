@@ -3,7 +3,7 @@ $(window).on('load',function() {
     const img = $("#cover")
     var rgbColors = colorThief.getColor(img[0])
     $("#header-container").css("background-color","rgb(" + rgbColors[0] +"," + rgbColors[1] + "," + rgbColors[2])
-    $("#voteButton").css("background-color","rgb(" + rgbColors[0] +"," + rgbColors[1] + "," + rgbColors[2])
+    $(".colorThiefButton").css("background-color","rgb(" + rgbColors[0] +"," + rgbColors[1] + "," + rgbColors[2])
     $(".radial-progress circle").css("stroke","rgb(" + rgbColors[0] +"," + rgbColors[1] + "," + rgbColors[2]) 
 })
 
