@@ -58,9 +58,9 @@
                                     <input type="hidden" name="album" value="{{ $album['name'] }}">
                                     <span class="mg-l-10 bolder-text">/ 10</span>
                                     @if(!isset($userVote))
-                                        <button class="btn mg-l-10 colorThiefButton" style="color:white;font-size:11px;padding:5px;">Voter</button>
+                                        <button id="buttonVote" class="btn mg-l-10 colorThiefButton" style="color:white;font-size:11px;padding:5px;">Voter</button>
                                     @else
-                                        <button class="btn mg-l-10 colorThiefButton" style="color:white;font-size:11px;padding:5px;">Modifier</button>
+                                        <button id="buttonVote" class="btn mg-l-10 colorThiefButton" style="color:white;font-size:11px;padding:5px;">Modifier</button>
                                     @endif
                                 </div>
                                 <span class="italic-text" style="color:grey;font-size:10px;">Un vote seulement / Nombre à virgule autorisé. (Remplacer la virgule par un point)</span>
@@ -112,7 +112,7 @@
                                 <label for="sendCommentaireTextarea" class="bolder-text">Votre commentaire : </label>
                                 <input style="width:300px;" class="form-control mg-b-10" name="title" type="text" placeholder="Titre" required/>
                                 <textarea name="comments" class="form-control" id="sendCommentaireTextarea" rows="3"></textarea>
-                                <button class="btn colorThiefButton mg-t-10" style="color:white;">Envoyer mon commentaire</button>
+                                <button id="buttonSendComment" class="btn colorThiefButton mg-t-10" style="color:white;">Envoyer mon commentaire</button>
                             </div>
                         </form>
                     </div>
