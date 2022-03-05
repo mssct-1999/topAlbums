@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 use App\Models\Vote;
+use App\Models\Commentaire;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
@@ -48,5 +49,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function votes() {
         return $this->hasMany(Vote::class);
+    }
+
+    public function recentVotes() 
+    {
+        return $this->hasMany(Vote::class)->orderBy('created_at','desc')->limit(5);
+    }
+
+    public function recentComments() 
+    {
+        return $this->hasMany(Commentaire::class,'id_user')->orderBy('created_at','desc')->limit(5);
     }
 }

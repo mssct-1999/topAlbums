@@ -51,7 +51,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $user->load('recentVotes','recentComments.album.artiste');
+        return view('User.show',compact('user'));
     }
 
     /**

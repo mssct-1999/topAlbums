@@ -25,7 +25,7 @@
     <link href="{{ secure_asset('css/jquery-ui.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-    <link rel="shortcut icon" href="{{ secure_asset('img/logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ secure_asset('img/icon.png') }}" type="image/x-icon">
 </head>
 <body>
     <div id="app">
@@ -99,21 +99,40 @@
     $("#searchAlbums").autocomplete({
         source: function(request,response) {
             appendTo:this,
-            $.getJSON(baseUrl + "/lastfmapi/getAlbumByName/" + request.term, function(data) {
+            $.getJSON(baseUrl + "/search/" + request.term, function(data) {
                 response($.map(data,function(value,key) {
-                    return {
-                        label: value.name + " -  " + value.artist,
-                        value: value.name,
-                        album: value.name,
-                        artist: value.artist,
-                        image: value.image[0]["#text"]
+                    // si il y a un id -> c'est un utilisateur
+                    if (value.id) {
+                        return {
+                            label: value.name + " (Utilisateur)",
+                            value: value.name, 
+                            image: value.profil_image,
+                            user_id:value.id
+                        }
                     }
+                    // sinon c'est un album
+                    else {
+                        return {
+                            label: value.name + " -  " + value.artist,
+                            value: value.name,
+                            album: value.name,
+                            artist: value.artist,
+                            image: value.image[0]["#text"]
+                        }
+                    }
+
                 }))
             });
         },
         select: function(event,ui) {
-            $("#searchbarForm").attr('action',baseUrl + "/albums/show/" + ui.item.artist + "/" + ui.item.album)
-            $("#searchbarForm").submit()
+            if (!ui.item.user_id) {
+                $("#searchbarForm").attr('action',baseUrl + "/albums/show/" + ui.item.artist + "/" + ui.item.album)
+                $("#searchbarForm").submit()
+            }
+            else {
+                $("#searchbarForm").attr('action',baseUrl + "/users/show/" + ui.item.user_id)
+                $("#searchbarForm").submit() 
+            }
         }
     });
 
@@ -121,12 +140,20 @@
     var $li = $('<li>'),
         $img = $('<img>');
 
-        $img.attr({
-            src: item.image,
-            alt: item.label,
-            style: 'margin-right:5px;background-color:transparent;border:none;'
-        });
-
+        if (item.user_id) {
+            $img.attr({
+                src: baseUrl + "/" + item.image,
+                alt: item.label,
+                style: 'margin-right:5px;background-color:transparent;border:none;width:50px;'
+            }); 
+        }
+        else {
+            $img.attr({
+                src: item.image,
+                alt: item.label,
+                style: 'margin-right:5px;background-color:transparent;border:none;width:50px;'
+            });
+        }
 
     $li.attr('data-value', item.label);
     $li.append($img).append(item.label);    

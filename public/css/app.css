@@ -11776,6 +11776,11 @@ a:hover {
   align-items: center;
 }
 
+.align-flex-start {
+  display: flex;
+  align-items: flex-start;
+}
+
 .d-space-around {
   display: flex;
   justify-content: space-around;

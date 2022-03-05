@@ -5,3 +5,8 @@
  */
 
 require('./bootstrap');
+
+$().ready(function() {
+    $("[data-toggle='tooltip']").tooltip()
+})
+

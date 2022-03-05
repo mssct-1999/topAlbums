@@ -92,14 +92,19 @@
                     <hr>
                     @foreach($comments as $comment)
                         <div class="shadow mg-t-10">
-                            <div>
-                                <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
-                                <p>{{ $comment->comments }}</p>
-                                <div style="display:flex;justify-content:space-between;">
+                            <div class="align-flex-start">
+                                <div>
+                                    <img src="{{ secure_asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
+                                </div>
+                                <div class="mg-l-15 w-100">
+                                    <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
+                                    <p>{{ $comment->comments }}</p>
                                     <span class="italic-text">Par {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</span>
-                                    @if(Auth::user()->id == $comment->user->id)
-                                        <a href="{{ route('comments.destroy',$comment->id) }}" class="btn btn-danger mg-l-10"><i class="fas fa-trash"></i></a>
-                                    @endif
+                                    <div style="display:flex;justify-content:flex-end;">
+                                        @if(Auth::user()->id == $comment->user->id)
+                                            <a href="{{ route('comments.destroy',$comment->id) }}" class="btn btn-danger mg-l-10"><i class="fas fa-trash"></i></a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
