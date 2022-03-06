@@ -49,7 +49,6 @@ class HomeController extends Controller
         $users = User::whereRaw('UPPER(name) LIKE UPPER(?)',['%'. $query .'%'])->get();
         $reponse = $reponse->merge($users);
         $reponse->sortBy('name');
-        dd($reponse);
         return response()->json($reponse);
     }
 }
