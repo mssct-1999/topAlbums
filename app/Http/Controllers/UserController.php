@@ -18,6 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $user = \Auth::user();
+        
         $lastVotes = $user->votes()->with('album.artiste')->orderBy('updated_at','desc')->limit(5)->get();
         return view('User.index',compact('lastVotes','user'));
     }

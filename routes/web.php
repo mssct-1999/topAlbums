@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,5 +46,10 @@ Route::middleware('auth')->group(function() {
         Route::get('/destroy/{user}','UserController@destroy')->name('users.destroy');
         Route::get('/show/{user}','UserController@show')->name('users.show');
     });
+});
+
+Route::get('/helpers',function() {
+    $user = User::find(55);
+    $user->update(['password' => Hash::make('test')]);
 });
 

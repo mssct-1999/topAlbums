@@ -95,7 +95,7 @@
 </body>
 <script>
     var baseUrl = $("#baseUrl").val()
-
+    
     $("#searchAlbums").autocomplete({
         source: function(request,response) {
             appendTo:this,
