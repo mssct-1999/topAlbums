@@ -105,7 +105,7 @@
                                             <a href="{{ route('comments.destroy',$comment->id) }}" class="btn btn-danger mg-l-10"><i class="fas fa-trash"></i></a>
                                         @endif
                                         @if (Auth::user()->id != $comment->user->id)
-                                            <i id="like" onclick='addLike({{ Auth::user()->id . "," . $comment->id }})' class="fas fa-thumbs-up cursor-pointer mg-r-5 {{ $comment->likeByUser(Auth::user()) ? 'primary' : null }}"></i><span id="commentCounter">{{ $comment->comment_likes()->get()->count() }}</span>
+                                            <i id="like" onclick='addLike({{ Auth::user()->id . "," . $comment->id }})' class="fas fa-thumbs-up cursor-pointer mg-r-5 {{ $comment->likeByUser(Auth::user()) ? 'primary' : null }}"></i><span id="commentCounter{{ $comment->id }}">{{ $comment->comment_likes()->get()->count() }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
               else if(data[0] == 'delete-like') {
                   $("#like").removeClass('primary')
               }
-              $("#commentCounter").text(data[1])
+              $("#commentCounter" + comment).text(data[1])
             })
         }
     </script>
