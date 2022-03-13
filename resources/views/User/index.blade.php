@@ -6,7 +6,7 @@
         @isset($user->profil_image)
             <div class="mg-t-20 mg-l-20 d-align-center">
                 <img src="{{ secure_asset($user->profil_image) }}" alt="Photo de profile" style="border-radius:100px;width:100px;">
-                <h1 class="mg-l-15 bolder-text"><span>@</span>{{ $user->name }}</h1>
+                <h1 class="mg-l-15 bolder-text">{{ $user->name }}</h1>
             </div>
         @else 
             <div class="mg-l-20 mg-t-20 d-align-center">

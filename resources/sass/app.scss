@@ -33,6 +33,10 @@ li {
 .main-title {
     font-size:20px;
     font-weight:bolder;
+    background-color:#0C2E69;
+    color:white;
+    padding:10px;
+    border-radius: 10px;
 }
 
 .barlow-font {
@@ -60,7 +64,8 @@ a:hover {
     color:#0B5ED7;
 }
 
-$spaceamounts: (5,10,15,20,25,30,35,40,45,50,75,100);
+
+$spaceamounts: (0,5,10,15,20,25,30,35,40,45,50,75,100);
 $sides: (top,bottom,left,right);
 
 @each $space in $spaceamounts {

@@ -2,6 +2,7 @@
 
 @section('content')
     @if(isset($album))
+
         <div id="header-container" style="height:200px;width:100%;margin-top:0px !important;" data-img-url="{{ $album['image'][2]['#text'] }}">
             <div id="album-text-info" class="container" style="display:flex;justify-content:space-between;">
                 <div class="mg-t-20" style="display:flex;flex-direction:column;">
@@ -15,11 +16,12 @@
                     <img id="cover" crossorigin="anonymous" src="{{ $album['image'][3]['#text'] }}" alt="Pochette d'album" style="position:relative;top:20%;left:50%;border:1px solid lightgrey;"/>
                 </div>
             </div>
+
             <div id="content">
                 @if(isset($album['tracks']['track']) && count($album['tracks']['track']))
                     <div style="display:flex;"> 
                         <div id="tracklist-album" class="mg-l-20 shadow">
-                            <span class="bolder-text main-title">Tracklist</span>
+                            <span class="bolder-text text-20">Tracklist</span>
                             @foreach($album['tracks']['track'] as $track)
                                 <div class="track-album">
                                     <a href="{{ $album['url'] }}" target="_blank" data-toggle="tooltip" data-placement="left" title="Écouter sur LastFM"><img class="disk-image" src="{{ $album['image'][1]['#text'] }}" alt="Pochette album petite"></a>
@@ -29,9 +31,10 @@
                         </div>
                         
                 @endif
+
                 <div id="container-right" class="mg-l-20" style="width:40%;">   
                     <div id="notation-album" class="mg-l-10 shadow">
-                        <span class="bolder-text main-title">Notation</span>
+                        <span class="bolder-text text-20">Notation</span>
                         <div class="d-align-center d-space-between box">
                             @if(isset($votes))
                                 <div>
@@ -67,9 +70,11 @@
                             </form>
                         </div>
                     </div>
+                    
+                    <!-- Derniers votes -->
                     @if(isset($lastVotes))
                         <div class="mg-l-10 shadow">
-                            <span class="bolder-text main-title">Derniers votes</span>
+                            <span class="bolder-text text-20">Derniers votes</span>
                             @foreach($lastVotes as $vote)
                                 <li class="mg-t-10">{{ $vote->updated_at->format('d/m/Y')}} - {{ $vote->user->name  }} - 
                                     @if ($vote->note >= 7)
@@ -94,7 +99,7 @@
                         <div class="shadow mg-t-10">
                             <div class="align-flex-start">
                                 <div>
-                                    <img src="{{ asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
+                                    <img src="{{ secure_asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
                                 </div>
                                 <div class="mg-l-15 w-100">
                                     <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
