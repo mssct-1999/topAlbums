@@ -10985,6 +10985,10 @@ a:hover {
   cursor: pointer;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 /** color **/
 
 .primary {

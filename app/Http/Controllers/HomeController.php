@@ -8,6 +8,8 @@ use App\Models\Vote;
 use App\Models\Album;
 use App\User;
 use App\Models\Artiste;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -50,5 +52,24 @@ class HomeController extends Controller
         $reponse = $reponse->merge($users);
         $reponse->sortBy('name');
         return response()->json($reponse);
+    }
+
+    /**
+     * Retourne le classement des albums selon leur note moyenne.
+     */
+    public function getClassement() 
+    {
+        $albums = Cache::remember('albums',Carbon::now()->addHour(),function()  {
+            $albums = Album::withCount(['votes as average_vote' => function($query) {
+                $query->select(\DB::raw('coalesce(avg(note),0)'));
+            }])
+            ->orderByDesc('average_vote')
+            ->with('artiste')->get();
+            $albums->map(function($album,$key) {
+                return $album->small_cover = $album->cover[1]['#text'];
+            }); 
+            return $albums; 
+        });
+        return response()->json($albums);
     }
 }

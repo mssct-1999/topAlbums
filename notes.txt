@@ -1,4 +1,20 @@
-# COULEURS
- 
-rose : #FAE3EB
-bleu : #1647FB
+Ajouter système d'anectodes sur un album / les anectodes peuvent être supprimée ou approuvée par un utilisateur administrateur.
+
+Ces anectodes une fois approuvée peuvent permettre de débloquer des trophées et des badges et droit supplémentaires.
+
+Trophée sous forme de badge ? Ces badges peuvent ête affichés sur le profil de l'utilisateur.
+L'utilisateur une fois un nombre de points suffisants pourra acquérir de nouveau droit et privilège (une nouvelle sous forme de palier)
+
+-> Son vote aura plus de poids sur les artistes qu'il connait le mieux. (auditeur confirmé)
+-> ... ? trouver d'autres idées
+-> L'utilisateur pourra à son tour valider des anectodes d'autres utilisateurs sur les artistes qu'il connait le mieux. 
+-> l'utilisateur pourra supprimer des commentaires sous les artistes qu'il connait le mieux
+
+Stats selon les artistes les connus d'un utilisateur / Le genre le plus écouté ? 
+
+
+-- UI 
+
+Personalisation de l'interface - black or light : 
+ - faire une dark interface - faire le bouton dans le front permettant le changement 
+ - sauvegarder dans un cookie la préférence de l'utilisateur

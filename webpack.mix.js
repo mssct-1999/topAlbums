@@ -15,4 +15,5 @@ mix.js([
     'resources/js/app.js',
     'resources/js/albums.js'
     ],'public/js')
+    .js('resources/js/home.js','public/js/home.js')
     .sass('resources/sass/app.scss', 'public/css');

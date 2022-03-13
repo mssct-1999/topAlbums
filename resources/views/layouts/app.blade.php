@@ -64,7 +64,12 @@
                             </div>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    @isset(Auth::user()->profil_image) 
+                                        <img src="{{ Auth::user()->profil_image }}" style="width:30px;height:30px;border-radius:20px;"/> 
+                                    @else
+                                        <img src="{{ secure_asset('img/default_picture_user.png') }}" style="width:30px;height:30px;border-radius:20px;"/> 
+                                    @endisset
+
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
