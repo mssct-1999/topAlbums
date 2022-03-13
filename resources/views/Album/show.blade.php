@@ -94,7 +94,7 @@
                         <div class="shadow mg-t-10">
                             <div class="align-flex-start">
                                 <div>
-                                    <img src="{{ asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
+                                    <img src="{{ secure_asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
                                 </div>
                                 <div class="mg-l-15 w-100">
                                     <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
