@@ -46,6 +46,10 @@ Route::middleware('auth')->group(function() {
         Route::get('/destroy/{user}','UserController@destroy')->name('users.destroy');
         Route::get('/show/{user}','UserController@show')->name('users.show');
     });
+
+    Route::prefix('commentLike')->group(function() {
+        Route::get('/{user}/{commentaire}','CommentLikeController@store');
+    });
 });
 
 Route::get('/helpers',function() {

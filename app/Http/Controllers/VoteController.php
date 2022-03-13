@@ -48,6 +48,10 @@ class VoteController extends Controller
      * Modification d'un vote
      */
     public function update(VoteRequest $request, Vote $vote) {
+        $checkDatas = $request->validate('update');
+        if (!$checkDatas['success']) {
+            return back()->with('danger',$checkDatas['message']);
+        }
         $vote->update(['note' => $request->note]);
         return redirect()->back();
     }

@@ -94,7 +94,7 @@
                         <div class="shadow mg-t-10">
                             <div class="align-flex-start">
                                 <div>
-                                    <img src="{{ secure_asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
+                                    <img src="{{ asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
                                 </div>
                                 <div class="mg-l-15 w-100">
                                     <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
@@ -103,6 +103,9 @@
                                     <div style="display:flex;justify-content:flex-end;">
                                         @if(Auth::user()->id == $comment->user->id)
                                             <a href="{{ route('comments.destroy',$comment->id) }}" class="btn btn-danger mg-l-10"><i class="fas fa-trash"></i></a>
+                                        @endif
+                                        @if (Auth::user()->id != $comment->user->id)
+                                            <i id="like" onclick='addLike({{ Auth::user()->id . "," . $comment->id }})' class="fas fa-thumbs-up cursor-pointer mg-r-5 {{ $comment->likeByUser(Auth::user()) ? 'primary' : null }}"></i><span id="commentCounter">{{ $comment->comment_likes()->get()->count() }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -132,3 +135,21 @@
         </div>
     @endif
 @endsection
+
+@push('js')
+    <script>
+
+        // ajout d'un like
+        var addLike = function(user,comment) {
+            $.get(baseUrl + '/commentLike/' + user + '/' + comment,function(data) {
+              if (data[0] == "add-like") {
+                $("#like").addClass('primary')
+              }
+              else if(data[0] == 'delete-like') {
+                  $("#like").removeClass('primary')
+              }
+              $("#commentCounter").text(data[1])
+            })
+        }
+    </script>
+@endpush

@@ -24,7 +24,7 @@ class VoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'note' => 'required|between:1,10'
+            'note' => 'required'
         ];
     }
 

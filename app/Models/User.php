@@ -51,4 +51,9 @@ class User extends Model
 	{
 		return $this->hasMany(Vote::class);
 	}
+
+	public function comment_likes()
+	{
+		return $this->hasMany(CommentLike::class,'id_comment');
+	}
 }

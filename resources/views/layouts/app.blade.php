@@ -93,6 +93,7 @@
         </main>
     </div>
 </body>
+@stack('js')
 <script>
     var baseUrl = $("#baseUrl").val()
     

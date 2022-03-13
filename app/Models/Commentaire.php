@@ -39,4 +39,23 @@ class Commentaire extends Model
 	{
 		return $this->belongsTo(User::class,'id_user');
 	}
+
+	public function comment_likes()
+	{
+		return $this->hasMany(CommentLike::class,'id_comment');
+	}
+
+	public function likeByUser($user)
+	{
+		$commentLike = $this->comment_likes(function($query) use($user) {
+			$query->where('id_user',$user->id);
+		})
+		->first();
+		if($commentLike) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
