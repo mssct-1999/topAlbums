@@ -3,23 +3,17 @@
 @section('content')
 
     <div class="container-fluid mg-t-40">
-        @isset($user->profil_image)
-            <div class="mg-t-20 mg-l-20 d-align-center">
-                <img src="{{ secure_asset($user->profil_image) }}" alt="Photo de profile" style="border-radius:100px;width:100px;">
-                <h1 class="mg-l-15 bolder-text">{{ $user->name }}</h1>
+        <div class="mg-t-20 mg-l-20 d-align-center">
+            <img @isset($user->profil_image) src="{{ secure_asset($user->profil_image) }}" @else src="{{ secure_asset('img/default_picture_user.png') }}" @endisset alt="Photo de profil de {{ $user->name }}" style="width:100px;border-radius:50%;"/>
+            <div>
+                <h1 class="mg-l-15 mg-b-0 bolder-text">{{ $user->name }}</h1>
+                <span class="mg-l-15 text-11 italic-text">Utilisateur depuis le {{ $user->created_at->format('d/m/Y') }}</span>
             </div>
-        @else 
-            <div class="mg-l-20 mg-t-20 d-align-center">
-            <img src="{{ secure_asset('img/default_picture_user.png') }}" alt="Photo de profile par défaut" style="width:100px;border-radius:100px;">
-            <h1 class="mg-l-15 bolder-text"><span>@</span>{{ $user->name }}</h1>
-            </div>
-        @endisset
+        </div>
         <hr>
         <div class="row" style="padding:10px;">
             <!-- début formulaire modification info utilisateur -->
-            <div class="col-md-6 shadow"> 
-                <h4 class="bolder-text">Modifier les informations de mon profil</h4>
-                <hr>
+            <x-panel title="Modifier les informations de mon profil" icon="fa-solid fa-id-card fa-2x" class="col-md-6 shadow"> 
                 <div class="container-fluid">
                     <form action="{{ route('users.update',$user->id) }}" enctype="multipart/form-data" method="post">
                         @csrf
@@ -34,20 +28,17 @@
                         <div class="form-group">
                             <span class="mg-r-10">Photo de profil :</span><input name="profil_picture" type="file" id="customFile">
                         </div>
-                        <button class="btn btn-success mg-b-30" style="font-size:10px;">Modifier mes informations</button>
+                        <div class="d-align-center mg-t-30">
+                            <button class="btn btn-success btn-sm text-12" style="background-color:#0c2e69 !important;border:1px solid #0c2e69 !important;"><i class="fa-solid fa-square-pen mg-r-5"></i>Modifier mes informations</button>
+                            <a href="{{ route('users.destroy',$user->id) }}"  class="btn btn-danger btn-sm text-12 mg-r-5 mg-l-5"><i class="fas fa-user-slash mg-r-5"></i>Supprimer le profil</a>
+                            <a href="{{ route('users.deleteVotes',$user->id) }}" class="btn btn-danger btn-sm text-12"><i class="fas fa-folder-minus mg-r-5"></i>Supprimer tous mes votes</a>
+                        </div>
                     </form>
-                    <div>
-                        <h5 class="bolder-text mg-b-10" style="color:#e3342f;"><i class="fas fa-exclamation-triangle mg-r-5"></i>Zone rouge</h5>
-                        <a href="{{ route('users.destroy',$user->id) }}"  class="badge badge-danger text-12"><i class="fas fa-user-slash mg-r-5"></i>Supprimer le profil</a>
-                        <a href="{{ route('users.destroy',$user->id) }}" class="badge badge-danger text-12">Supprimer tous mes votes</a>
-                    </div>
                 </div>
-            </div>
+            </x-panel>
 
             <!-- début derniers vote de l'utilisateur -->
-            <div class="col-md-6">
-                <h4 class="bolder-text">Derniers votes de l'utilisateur</h4>
-                <hr>
+            <x-panel title="Derniers votes de l'utilisateur" icon="fa-solid fa-check-to-slot fa-2x" class="col-md-5 mg-l-10">
                 @if($lastVotes->count() > 0)
                     <div>
                         @foreach($lastVotes as $vote) 
@@ -65,7 +56,7 @@
                         <span class="italic-text">Aucune activité récente.</span>
                     </div>
                 @endif
-            </div>
+            </x-panel>
         </div>
     </div>
 @endsection 

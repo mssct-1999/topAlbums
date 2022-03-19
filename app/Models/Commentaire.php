@@ -47,6 +47,15 @@ class Commentaire extends Model
 	}
 
 	/**
+	 * Retourne la liste des utilisateurs qui ont liké le commentaire courant.
+	 * Pivot sur la table comment_like.
+	 */
+	public function users_liked() 
+	{
+		return $this->belongsToMany('App\User','comment_like','id_comment','id_user');
+	}
+
+	/**
 	 * @param \App\User
 	 * @return boolean 
 	 * Retourne vrai si l'utilisateur passé en paramètre à aimer le commentaire courant. Retourne faux sinon.

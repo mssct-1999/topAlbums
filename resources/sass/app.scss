@@ -64,6 +64,23 @@ a:hover {
     color:#0B5ED7;
 }
 
+// composant custom panel
+.card.custom-panel {
+    padding: 0;
+}
+
+.card.custom-panel .card-header {
+    background-color:#0C2E69;
+    color:white;
+}
+
+.custom-panel .card-header {
+    color:white;
+    font-weight:normal;
+    font-size: 15px;
+}
+
+
 
 $spaceamounts: (0,5,10,15,20,25,30,35,40,45,50,75,100);
 $sides: (top,bottom,left,right);

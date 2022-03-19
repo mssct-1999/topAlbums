@@ -10999,6 +10999,21 @@ a:hover {
   color: #0B5ED7;
 }
 
+.card.custom-panel {
+  padding: 0;
+}
+
+.card.custom-panel .card-header {
+  background-color: #0C2E69;
+  color: white;
+}
+
+.custom-panel .card-header {
+  color: white;
+  font-weight: normal;
+  font-size: 15px;
+}
+
 .mg-t-0 {
   margin-top: 0px !important;
 }

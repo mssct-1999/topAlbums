@@ -1,0 +1,23 @@
+body.dark-theme {
+  background-color: #06090F !important;
+  color: white;
+}
+
+nav.dark-theme {
+  background-color: #13151D !important;
+  color: white;
+}
+
+nav.dark-theme .navbar-brand {
+  color: white;
+}
+
+input.dark-theme {
+  background-color: #171717;
+  color: white;
+}
+
+.album-name.dark-theme {
+  color: white;
+}
+

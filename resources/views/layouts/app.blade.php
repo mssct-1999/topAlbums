@@ -23,13 +23,14 @@
     <!-- Styles -->
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ secure_asset('css/dark-app.css') }}" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{ secure_asset('img/icon.png') }}" type="image/x-icon">
 </head>
-<body>
+<body @if($theme == 'dark') class="dark-theme" @endif>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm {{ $theme == 'dark' ? 'dark-theme' : null }}">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     𝙏𝙊𝙋 𝘼𝙇𝘽𝙐𝙈𝙎
@@ -73,11 +74,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('users.index') }}" class="dropdown-item">Profil</a>
+                                    <a href="{{ route('users.index') }}" class="dropdown-item"><i class="fas fa-user-circle mg-r-10"></i>Profil</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        Déconnexion
+                                       <i class="fa-solid fa-arrow-right-from-bracket mg-r-10"></i>Déconnexion
                                     </a>
                                     
 
@@ -88,6 +89,9 @@
                             </li>
                     </ul>
                     @endguest
+                    <div id="themeStyle">
+                        <i id="toggleThemeIcon" data-theme="light" data-toggle="tooltip" title="Changer le thème" @if ($theme == 'light') class="fa-solid fa-moon"  @elseif($theme == 'dark')  class="fa-solid fa-sun" @endif></i>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -167,4 +171,5 @@
     return $li.appendTo(ul);
   };
 </script>
+@include('includes.toaster')
 </html>

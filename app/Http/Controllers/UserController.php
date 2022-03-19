@@ -77,7 +77,6 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $datas = $request->all();
-        // dd($_FILES);
         if(isset($request->profil_picture)) {
             $dataImage = $_FILES['profil_picture']['name'];
             $img = Image::make($_FILES['profil_picture']['tmp_name']);
@@ -104,10 +103,18 @@ class UserController extends Controller
     {
         $hasVotes = $user->votes()->get();
         if ($hasVotes->count() > 0) {
-            $_GET['confirmDelete'] = true;
-            return back();
+            return back()->with('danger',"Suppression impossible - Cet utilisateur à un ou plusieurs votes d'enregistré.");
         }
         // todo redirection vers login.php -> page d'accueil car plus de compte
         return back()->with('success',"L'utilisateur a correctement été supprimé.");
+    }
+
+    /**
+     * Supprime tous les votes de l'utilisateur renseigné
+     */
+    public function deleteVotes(User $user) 
+    {
+        $user->votes()->delete();
+        return back()->with('success',"Tous les votes de {$user->name} ont été supprimé.");
     }
 }

@@ -60,4 +60,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany(Commentaire::class,'id_user')->orderBy('created_at','desc')->limit(5);
     }
+
+    public function comments_liked() 
+    {
+        return $this->belongsToMany('App\Models\Commentaire','comment_like','id_user','id_comment');
+    }
 }

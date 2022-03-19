@@ -83,8 +83,8 @@ class CommentaireController extends Controller
      */
     public function destroy(Commentaire $comments)
     {
+        $comments->users_liked()->detach();
         $comments->delete();
-        $comments->comment_likes()->destroy();
         return redirect()->back();
     }
 }

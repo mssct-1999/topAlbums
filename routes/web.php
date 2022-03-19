@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/update/{user}','UserController@update')->name('users.update');
         Route::get('/destroy/{user}','UserController@destroy')->name('users.destroy');
         Route::get('/show/{user}','UserController@show')->name('users.show');
+        Route::get('/deleteVotes/{user}','UserController@deleteVotes')->name('users.deleteVotes'); 
     });
 
     Route::prefix('commentLike')->group(function() {

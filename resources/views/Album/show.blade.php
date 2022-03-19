@@ -2,9 +2,8 @@
 
 @section('content')
     @if(isset($album))
-
         <div id="header-container" style="height:200px;width:100%;margin-top:0px !important;" data-img-url="{{ $album['image'][2]['#text'] }}">
-            <div id="album-text-info" class="container" style="display:flex;justify-content:space-between;">
+            <div id="album-text-info" class="container-fluid" style="display:flex;justify-content:space-between;">
                 <div class="mg-t-20" style="display:flex;flex-direction:column;">
                     <span class="barlow-font" style="color:white;font-size:18px;">{{ $album['artist'] }}</span>
                     <span class="barlow-font bolder-text" style="color:white;font-size:48px;">{{ $album['name'] }}</span>
@@ -12,8 +11,9 @@
                         <span class="barlow-font" style="color:white;">Sortie le {{ $album['wiki']['published'] }}</span>
                     @endif
                 </div>
-                <div id="container-cover" style="display:flex; justify-content:flex-end;">
-                    <img id="cover" crossorigin="anonymous" src="{{ $album['image'][3]['#text'] }}" alt="Pochette d'album" style="position:relative;top:20%;left:50%;border:1px solid lightgrey;"/>
+                <div id="container-cover" style="display:flex; justify-content:flex-end; margin-left:20px;">
+                    {{-- <img id="cover" crossorigin="anonymous" src="{{ $album['image'][3]['#text'] }}" alt="Pochette d'album" style="position:relative;top:20%;left:50%;border:1px solid lightgrey;"/> --}}
+                    <img id="cover" style="width:90%;" crossorigin="anonymous" src="{{ $album['image'][3]['#text'] }}" alt="Pochette d'album"/>
                 </div>
             </div>
 
@@ -28,8 +28,7 @@
                                     <li class="mg-l-10"><span class="bolder-text">#{{ $track['@attr']['rank'] }}</span> - {{ $track['name'] }}</li>
                                 </div>
                             @endforeach
-                        </div>
-                        
+                        </div>     
                 @endif
 
                 <div id="container-right" class="mg-l-20" style="width:40%;">   
@@ -101,6 +100,7 @@
                                 <div>
                                     <img src="{{ secure_asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
                                 </div>
+                                
                                 <div class="mg-l-15 w-100">
                                     <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
                                     <p>{{ $comment->comments }}</p>

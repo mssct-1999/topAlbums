@@ -13,9 +13,10 @@ const mix = require('laravel-mix');
 
 mix.js([
     'resources/js/app.js',
-    'resources/js/albums.js'
+    'resources/js/albums.js',
+    'resources/js/helpers.js'
     ],'public/js')
     .js('resources/js/home.js','public/js/home.js')
-    .sass('resources/sass/app.scss', 'public/css');
-
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/dark-app.scss','public/css')
     mix.disableNotifications();
