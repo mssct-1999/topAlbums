@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.toastr = require('toastr')
+global.tarteaucitron = require('tarteaucitronjs/tarteaucitron');
 
 function setCookie(name, value) {
     var d = new Date()
@@ -15,10 +16,32 @@ function setCookie(name, value) {
     document.cookie = name + "=" + value + ";" + expires +";path=/";
 }
 
-$().ready(function() {
-    $("[data-toggle='tooltip']").tooltip()
+var getCookie = function(name) {
+    // Split cookie string and get all individual name=value pairs in an array
+    var cookieArr = document.cookie.split(";");
+    // Loop through the array elements
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        /* Removing whitespace at the beginning of the cookie name
+        and compare it with the given string */
+        if(name == cookiePair[0].trim()) {
+            // Decode the cookie value and return
+            return decodeURIComponent(cookiePair[1]);
+        }
+    } 
+    // Return null if not found
+    return null;
+}
 
-    $("#toggleThemeIcon").attr('data-theme') == 'light' ? $("input").addClass('dark-theme') : $("input").removeClass('dark-theme') 
+
+
+
+$().ready(function() {
+    
+    $("[data-toggle='tooltip']").tooltip()
+    var theme = getCookie('theme')
+    theme == 'light' ? $("input").removeClass('dark-theme') : $("input").addClass('dark-theme') 
+    theme == 'light' ? $("html").removeClass('dark-theme') : $("html").addClass('dark-theme')
 
     var sun_icon = 'fa-solid fa-sun'
     var moon_icon = 'fa-solid fa-moon'
@@ -48,8 +71,6 @@ $().ready(function() {
 
             setCookie('theme','light')
         }
-
-        console.log(getCookie('theme'))
     })
 })
 

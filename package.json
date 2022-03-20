@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "tarteaucitronjs": "^1.9.5",
         "toastr": "^2.1.4"
     }
 }

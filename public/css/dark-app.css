@@ -12,12 +12,91 @@ nav.dark-theme .navbar-brand {
   color: white;
 }
 
+nav.dark-theme .navbar-brand:focus {
+  color: white;
+}
+
+nav.dark-theme .navbar-brand:hover {
+  color: white;
+}
+
+nav.dark-theme #navbarSupportedContent .nav-link {
+  color: white;
+}
+
 input.dark-theme {
+  background-color: #171717;
+  color: white;
+}
+
+input.dark-theme:focus {
+  background-color: #171717;
+  color: white;
+}
+
+body.dark-theme input {
+  background-color: #171717;
+}
+
+body.dark-theme input:focus {
+  background-color: #171717;
+  color: white;
+}
+
+body.dark-theme textarea {
+  background-color: #171717;
+}
+
+body.dark-theme textarea:focus {
   background-color: #171717;
   color: white;
 }
 
 .album-name.dark-theme {
   color: white;
+}
+
+body.dark-theme .card {
+  background-color: #171923 !important;
+}
+
+body.dark-theme .shadow {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 24px !important;
+}
+
+body.dark-theme hr {
+  color: white;
+}
+
+body.dark-theme .percentage.bolder-text {
+  fill: white;
+}
+
+body.dark-theme .dropdown-menu.dropdown-menu-right {
+  background-color: #13151D;
+}
+
+body.dark-theme .dropdown-menu.dropdown-menu-right .dropdown-item {
+  color: white;
+}
+
+body.dark-theme .dropdown-menu.dropdown-menu-right .dropdown-item:hover {
+  color: black;
+}
+
+body.dark-theme .dropdown-menu.dropdown-menu-right .dropdown-item:hover i {
+  color: black;
+}
+
+body.dark-theme .bolder-text {
+  color: white;
+}
+
+.card.custom-panel.shadow {
+  box-shadow: none !important;
+}
+
+body.dark-theme #cover {
+  box-shadow: white 0px 1px 7px;
 }
 

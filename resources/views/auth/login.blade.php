@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8"> 
             <div class="mg-t-10" style="display:flex;align-items:center;"> 
-                <img src="{{ secure_asset('img/animated-logo.gif') }}" alt="Logo" style="width:100px;">
+                <img src="{{ secure_asset('img/logo-removebg.gif') }}" alt="Logo" style="width:100px;">
                 <h3 class="bolder-text">Veuillez vous authentifier pour continuer</h3>
             </div>
             <div class="card">
@@ -44,7 +44,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btn-sm">
                                     Se connecter
                                 </button>
                             </div>
