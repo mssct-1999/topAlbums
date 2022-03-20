@@ -85,12 +85,14 @@ class UserController extends Controller
                 // suppression de l'ancienne image
                 File::delete($user->profil_image);
             }
+            // enregistrement de l'image dans public/img/
             $filePath = 'img/' . $request->name . '_' . $dataImage;
             $img->save($filePath);
+            // modification de l'url en base de données avec la nouvelle image
             $datas['profil_image'] = $filePath;
         }
         $user->update($datas);
-        return redirect()->back();
+        return redirect()->back()->with('success',"La modification de votre profil s'est correctement effectué.");
     }
 
     /**

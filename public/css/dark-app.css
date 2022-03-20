@@ -65,7 +65,7 @@ body.dark-theme .shadow {
 }
 
 body.dark-theme hr {
-  color: white;
+  background-color: white;
 }
 
 body.dark-theme .percentage.bolder-text {
