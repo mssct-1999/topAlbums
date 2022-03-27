@@ -109,7 +109,7 @@
                         <div>
                             <span class="bolder-text">Album avec le plus de votes</span>
                             <div class="mg-t-10 d-align-center">
-                                <img src="{{ \App\LastFMApiHelper::getCoverAlbum($votes->mostVotedAlbum->artiste,$votes->mostVotedAlbum->nom)[1]['#text'] }}" style="width:70px;border-radius:70px;"/>
+                                <img src="{{ \App\LastFMAPIHelper::getCoverAlbum($votes->mostVotedAlbum->artiste,$votes->mostVotedAlbum->nom)[1]['#text'] }}" style="width:70px;border-radius:70px;"/>
                                 <div class="flex-column">
                                     <span class="mg-l-10">{{ $votes->mostVotedAlbum->nom }} - {{ $votes->mostVotedAlbum->nb_votes }} votes</span>
                                     <span class="mg-l-10 italic-text">{{ $votes->mostVotedAlbum->artiste }}</span>
