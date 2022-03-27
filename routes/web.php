@@ -48,8 +48,17 @@ Route::middleware('auth')->group(function() {
         Route::get('/deleteVotes/{user}','UserController@deleteVotes')->name('users.deleteVotes'); 
     });
 
+    // LIKES
     Route::prefix('commentLike')->group(function() {
         Route::get('/{user}/{commentaire}','CommentLikeController@store');
+    });
+
+    // ADMIN
+    Route::middleware('is.admin')->group(function() {
+        Route::prefix('admin')->group(function() {
+            Route::get('/','AdminController@index')->name('admin.index');
+            Route::get('/launchRemoteConnection/{user}','AdminController@launchRemoteConnection')->name('admin.launchRemoteConnection');
+        });
     });
 });
 

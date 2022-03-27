@@ -81,7 +81,7 @@ class UserController extends Controller
             $dataImage = $_FILES['profil_picture']['name'];
             $img = Image::make($_FILES['profil_picture']['tmp_name']);
             // si changement d'image 
-            if (isset($user->profil_image)) {
+            if (isset($user->profil_image) && $user->profil_image != "img/default_picture_user.png") {
                 // suppression de l'ancienne image
                 File::delete($user->profil_image);
             }

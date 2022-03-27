@@ -17,6 +17,7 @@ mix.js([
     'resources/js/helpers.js'
     ],'public/js')
     .js('resources/js/home.js','public/js/home.js')
+    .js('resources/js/admin.js','public/js/admin.js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/dark-app.scss','public/css')
     mix.disableNotifications();

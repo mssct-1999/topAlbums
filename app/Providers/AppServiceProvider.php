@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -30,6 +31,29 @@ class AppServiceProvider extends ServiceProvider
                 $theme = 'light';
             }
             $view->with('theme',$theme); 
+        });
+
+        Blade::directive('admin',function() {
+            return "<?php if(App\User::isAdmin(Auth::user())): ?>";
+        });
+
+        Blade::directive('endadmin',function() {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('comparaison',function($number) {
+            $php = "
+            <?php 
+                if (isset($number)) {
+                    if($number >= 0) {
+                        echo \"+\" . $number; 
+                    }
+                    else {
+                        echo $number;
+                    }
+                }
+            ?>";
+            return $php;
         });
     }
 }

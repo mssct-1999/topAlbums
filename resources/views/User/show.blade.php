@@ -4,9 +4,9 @@
     
     <div class="container-fluid mg-t-40">
         <div class="mg-t-20 mg-l-20 d-align-center">
-            <img @isset($user->profil_image) src="{{ secure_asset($user->profil_image) }}" @else src="{{ secure_asset('img/default_picture_user.png') }}" @endisset alt="Photo du profil de {{ $user->name }}" style="width:100px;border-radius:100px;"/>
+            <img @isset($user->profil_image) src="{{ secure_asset($user->profil_image) }}" @else src="{{ secure_asset('img/default_picture_user.png') }}" @endisset alt="Photo du profil de {{ $user->name }}" style="width:100px;height:100px;border-radius:100px;"/>
             <div>
-                <h1 class="mg-l-15 mg-b-0 bolder-text">{{ $user->name }}</h1>
+                <h1 class="mg-l-15 mg-b-0 bolder-text">{{ $user->name }} @admin [uid#{{ $user->id }}] @endadmin</h1>
                 <span class="mg-l-15 text-11 italic-text">Utilisateur depuis le {{ $user->created_at->format('d/m/Y') }}</span>
             </div>
         </div>

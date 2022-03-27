@@ -26,7 +26,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','profil_image'
+        'name', 'email', 'password','profil_image','is_admin'
     ];
 
     /**
@@ -45,7 +45,27 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'int'
     ];
+
+    /**
+     * @param user 
+     * Détermine si l'utilistaeur pasé en paramètre est un administrateur
+     */
+    public static function isAdmin($user)
+    {
+        if (isset($user)) {
+            if ($user->is_admin) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        } 
+        else {
+            return false;
+        }
+    }
 
     public function votes() {
         return $this->hasMany(Vote::class);

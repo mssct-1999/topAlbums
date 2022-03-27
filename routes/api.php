@@ -26,5 +26,11 @@ Route::middleware('auth')->group(function() {
         Route::get('/classement',[HomeController::class,'getClassement']);
     });
 
+    // ADMIN 
+    Route::middleware('is.admin')->group(function() {
+        Route::prefix('admin')->group(function() {
+            Route::get('/searchUser/{libelle?}/{user?}','AdminController@searchUser');
+        });
+    });
 });
 
