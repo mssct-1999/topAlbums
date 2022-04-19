@@ -10,7 +10,7 @@
     <title>Top Albums</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ secure_asset('js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
@@ -21,12 +21,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/jquery-ui.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/dark-app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ secure_asset('css/dark-app.css') }}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="{{ asset('img/icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ secure_asset('img/icon.png') }}" type="image/x-icon">
 </head>
 <body @if($theme == 'dark') class="dark-theme" @endif>
     <div id="app">
@@ -66,9 +66,9 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @isset(Auth::user()->profil_image) 
-                                        <img src="{{ asset(Auth::user()->profil_image) }}" style="width:30px;height:30px;border-radius:20px;"/> 
+                                        <img src="{{ secure_asset(Auth::user()->profil_image) }}" style="width:30px;height:30px;border-radius:20px;"/> 
                                     @else
-                                        <img src="{{ asset('img/default_picture_user.png') }}" style="width:30px;height:30px;border-radius:20px;"/> 
+                                        <img src="{{ secure_asset('img/default_picture_user.png') }}" style="width:30px;height:30px;border-radius:20px;"/> 
                                     @endisset
 
                                 </a>
