@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="d-align-center">
-        <img class="mg-t-20" @isset(Auth::user()->profil_image) src="{{ Auth::user()->profil_image }}" @else src="{{ secure_asset('img/default_picture_user.png') }}" @endisset style="width:70px;height:70px;border-radius:70px;"/>
+        <img class="mg-t-20" @isset(Auth::user()->profil_image) src="{{ Auth::user()->profil_image }}" @else src="{{ asset('img/default_picture_user.png') }}" @endisset style="width:70px;height:70px;border-radius:70px;"/>
         <h1 class="mg-t-30 mg-l-10">Bienvenue {{ Auth::user()->name }}</h1>
     </div>
     <div class="mg-t-50">
@@ -24,5 +24,5 @@
 @endsection
 
 @push('js')
-    <script src="{{ secure_asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/home.js') }}"></script>
 @endpush

@@ -102,7 +102,7 @@
                         <div class="mg-r-50">
                             <span class="bolder-text">Utilisateur le plus actif</span>
                             <div class="mg-t-10">
-                                <img src="{{ secure_asset($votes->mostActiveUser->profil_image) }}" style="width:70px;border-radius:70px;"/>
+                                <img src="{{ asset($votes->mostActiveUser->profil_image) }}" style="width:70px;border-radius:70px;"/>
                                 <span class="mg-l-10">{{ $votes->mostActiveUser->name }} - {{ $votes->mostActiveUser->nb_votes }} votes</span>
                             </div>
                         </div>
@@ -138,5 +138,5 @@
 @endsection
 
 @push('js')
-    <script src="{{ secure_asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 @endpush

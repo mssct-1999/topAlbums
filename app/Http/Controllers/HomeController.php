@@ -49,7 +49,9 @@ class HomeController extends Controller
     {
         $reponse = collect(LastFMAPIHelper::getAlbumsFromNames($query)['album']);
         $users = User::whereRaw('UPPER(name) LIKE UPPER(?)',['%'. $query .'%'])->get();
+        $artistes = collect(LastFMAPIHelper::getArtistesFromNom($query)['artist']);
         $reponse = $reponse->merge($users)->sortBy('name');
+        $reponse = $reponse->merge($artistes)->sortBy('name');
         return response()->json($reponse);
     }
 

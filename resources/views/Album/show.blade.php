@@ -98,13 +98,13 @@
                         <div class="shadow mg-t-10">
                             <div class="align-flex-start">
                                 <div>
-                                    <img src="{{ secure_asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
+                                    <img src="{{ asset($comment->user()->first()->profil_image) }}" alt="Photo de profil de {{ $comment->user()->first()->name }}" style="width:50px;border-radius:50px;">
                                 </div>
                                 
                                 <div class="mg-l-15 w-100">
                                     <h5 style="font-weight:bolder;">{{ $comment->title }}</h5>
                                     <p>{{ $comment->comments }}</p>
-                                    <span class="italic-text">Par {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</span>
+                                    <span class="italic-text">Par {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }} @if($comment->user->is_admin)  <span class="badge badge-pill badge-staff mg-l-5">TOP ALBUM TEAM</span> @endif</span>
                                     <div style="display:flex;justify-content:flex-end;">
                                         @if(Auth::user()->id == $comment->user->id)
                                             <a href="{{ route('comments.destroy',$comment->id) }}"><i class="fas fa-trash mg-r-5"></i></a>

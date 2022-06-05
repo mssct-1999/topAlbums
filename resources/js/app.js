@@ -9,6 +9,9 @@ require('./bootstrap');
 window.toastr = require('toastr')
 global.tarteaucitron = require('tarteaucitronjs/tarteaucitron');
 
+
+
+
 function setCookie(name, value) {
     var d = new Date()
     d.setTime(d.getTime() + (365*24*60*60*1000));
@@ -37,6 +40,8 @@ var getCookie = function(name) {
 
 
 $().ready(function() {
+
+    window.baseUrl = $("#baseUrl").val()
     
     $("[data-toggle='tooltip']").tooltip()
     var theme = getCookie('theme')

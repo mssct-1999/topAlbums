@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\LastFMAPIHelper;
+use App\MusicBrainzApiHelper;
+use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -10,6 +13,14 @@ use Image;
 
 class UserController extends Controller
 {
+    private $userService; 
+
+    public function __construct() 
+    {   
+        $this->userService = new UserService(); 
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +63,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('recentVotes','recentComments.album.artiste');
+        $user->load('recentVotes','recentComments.album.artiste','votes.album.artiste');
+        $user->favoriteArtiste = $this->userService->getFavoriteArtistes($user);
         return view('User.show',compact('user'));
     }
 

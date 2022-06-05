@@ -18,7 +18,6 @@ var getCookie = function(name) {
 }
 
 $().ready(function() {
-
     var classementContainer = $("#classement")
     var num = 1;
     var theme = getCookie('theme') 

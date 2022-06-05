@@ -40002,6 +40002,7 @@ var getCookie = function getCookie(name) {
 };
 
 $().ready(function () {
+  window.baseUrl = $("#baseUrl").val();
   $("[data-toggle='tooltip']").tooltip();
   var theme = getCookie('theme');
   theme == 'light' ? $("input").removeClass('dark-theme') : $("input").addClass('dark-theme');

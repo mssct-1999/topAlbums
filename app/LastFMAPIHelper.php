@@ -53,6 +53,30 @@ class LastFMAPIHelper {
         }
         return $response->json()['album']['image'];
     }
+
+    /**
+     * @param artist : Nom de l'artiste
+     */
+    public static function getArtiste($artist) 
+    {
+        $url = self::$API_URL . "?method=artist.getinfo&api_key=" . self::$ACCESS_TOKEN . "&artist=" . urlencode($artist) . "&format=json"; 
+        $response = Http::get($url);
+        $datas = $response->json();
+        if (!isset($datas['artist'])) {
+            return null;
+        }
+        return $datas['artist'];
+    }
+
+    /**
+     * 
+     */
+    public static function getArtistesFromNom($name,$limit = 10)
+    {
+        $url = self::$API_URL . "?method=artist.search&api_key=" . self::$ACCESS_TOKEN . "&artist=" . urlencode($name)  ."&limit=" . $limit . "&format=json";
+        $response = Http::get($url);
+        return $response->json()['results']['artistmatches'];
+    }
 }
 
 ?>

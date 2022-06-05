@@ -11978,6 +11978,11 @@ svg.radial-progress text {
   }
 }
 
+.badge.badge-pill.badge-staff {
+  background-color: #1647FB !important;
+  color: #FAE3EB;
+}
+
 /** responsive design **/
 
 @media (max-width: 780px) {

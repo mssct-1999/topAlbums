@@ -60,6 +60,11 @@ Route::middleware('auth')->group(function() {
             Route::get('/launchRemoteConnection/{user}','AdminController@launchRemoteConnection')->name('admin.launchRemoteConnection');
         });
     });
+
+    // ARTISTES
+    Route::prefix('artistes')->group(function() {
+        Route::get('/show/{artiste}','ArtisteController@show')->name('artistes.show');
+    });
 });
 
 Route::get('/helpers',function() {
