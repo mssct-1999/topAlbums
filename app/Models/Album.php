@@ -38,6 +38,10 @@ class Album extends Model
 		'artiste_id'
 	];
 
+	protected $appends = [
+		'average_notation'
+	];
+
 	public function artiste()
 	{
 		return $this->belongsTo(Artiste::class);
@@ -84,5 +88,13 @@ class Album extends Model
 	public function getCoverAttribute() {
 		$artist = $this->artiste()->first();
 		return LastFMAPIHelper::getCoverAlbum($artist->nom,$this->nom);
+	}
+
+	/**
+	 * Propriété dynamique -> retourne la note moyenne des votes pour l'album courant.
+	 */
+	public function getAverageNotationAttribute()
+	{
+		return $this->votes()->avg('note');
 	}
 }

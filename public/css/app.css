@@ -12035,3 +12035,16 @@ svg.radial-progress text {
   }
 }
 
+.rating__background {
+  fill: lightgrey;
+  stroke: red;
+  stroke-width: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.rating__value {
+  fill: #FFB94B;
+  height: 100%;
+}
+

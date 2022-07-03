@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LastFMAPIHelper;
 use App\Models\Artiste;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ArtisteController extends Controller
@@ -48,8 +49,8 @@ class ArtisteController extends Controller
     public function show($artiste)
     {
         $artiste = LastFMAPIHelper::getArtiste($artiste);
-        // dd($artiste);
-        $artisteDb = Artiste::whereRaw('UPPER(nom) = UPPER(?)', [$artiste['name']])->first();
+        $artisteDb = Artiste::whereRaw('UPPER(nom) = UPPER(?)', [$artiste['name']])->with('albums')->first();
+        $artisteDb->load('anectodes');
         return view('Artistes.show',compact('artiste','artisteDb'));
     }
 
@@ -73,7 +74,15 @@ class ArtisteController extends Controller
      */
     public function update(Request $request, Artiste $artiste)
     {
-        //
+        $datas = $request->all();
+        if ($datas['profil_image']) {
+            $file = $request->file('profil_image'); 
+            $filename = $artiste->nom . '.' . $file->extension();
+            $datas['profil_image'] = asset('storage/artistes/' . $filename);
+            Storage::putFileAs('public/artistes',$file,$filename);
+            $artiste->update(['profil_image' => 'storage/artistes/' . $filename]);  
+            return back()->with('success',"L'artiste a correctement été mis à jour.");           
+        }
     }
 
     /**

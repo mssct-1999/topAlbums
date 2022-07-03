@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function() {
 
     // ARTISTES
     Route::prefix('artistes')->group(function() {
+        Route::post('/{artiste}','ArtisteController@update')->name('artistes.update');
         Route::get('/show/{artiste}','ArtisteController@show')->name('artistes.show');
     });
 });

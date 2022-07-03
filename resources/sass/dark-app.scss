@@ -104,3 +104,22 @@ body.dark-theme #cover {
 body.dark-theme i {
     color:white;
 }
+
+body.dark-theme .primary {
+    color:#0B5ED7;
+}
+
+body.dark-theme .light-dark {
+    background-color:#0D1117; 
+    padding:10px;
+    border-radius: 10px;;
+}
+
+body.dark-theme a {
+    color:white;
+}
+
+html.dark-theme .modal-content {
+    background-color:#06090F !important;
+    box-shadow: white 0px 1px 7px;
+}

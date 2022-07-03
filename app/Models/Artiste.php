@@ -27,12 +27,18 @@ class Artiste extends Model
 	protected $table = 'artistes';
 
 	protected $fillable = [
-		'nom'
+		'nom',
+		'profil_image'
 	];
 
 	public function albums()
 	{
 		return $this->hasMany(Album::class);
+	}
+
+	public function anectodes()
+	{
+		return $this->hasMany(Anectode::class,'id_artiste');
 	}
 
 	/**
